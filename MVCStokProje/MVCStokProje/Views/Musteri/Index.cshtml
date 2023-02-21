@@ -1,0 +1,41 @@
+﻿@using MVCStokProje.Models.Entity
+@model List<TBLMUSTERİ>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{ 
+    <p>
+        <b>Müşteri Adı:  </b>@Html.TextBox("p")
+        <input type="submit" value="Ara"/>
+    </p>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Müşteri ID</th>
+        <th>Müşteri Ad</th>
+        <th>Müşteri Soyad</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        
+    </tr>
+    <tbody>
+        @foreach (var mstr in Model)
+        {
+            <tr>
+                <th>@mstr.MUSTERIID </th>
+                <td>@mstr.MUSTERIAD </td>
+                <td>@mstr.MUSTERISOYAD </td>
+                
+                <td>@Html.ActionLink("Sil", "Sil", new { id = mstr.MUSTERIID }, new { @class = "btn btn-danger", onclick = "return confirm ('Silmek istiyor musunuz?')"  })</td>
+                <td><a href="/Musteri/MusteriGetir/@mstr.MUSTERIID" class=" btn btn-success">Güncelle</a></td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+<a href=" /Musteri/YeniMusteri/" class=" btn btn-primary">Müşteri Ekle</a>
+
